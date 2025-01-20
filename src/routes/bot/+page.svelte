@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {onMount} from "svelte"
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import { Chessground } from 'chessground'
@@ -7,7 +7,7 @@
 
 	const chess = new Chess()
 onMount(() => {
-const cg = Chessground(document.getElementById("board"), {
+const cg = Chessground(document.getElementById("board") as HTMLElement, {
       movable: {
         color: 'white',
         free: false,

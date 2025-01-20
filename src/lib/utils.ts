@@ -1,8 +1,8 @@
 import type { Api } from 'chessground/api';
 import type { Color, Key } from 'chessground/types';
-import type {ChessInstance} from "chess.js";
+import type {Chess} from "chess.js";
 import {SQUARES} from 'chess.js';
-export function toDests(chess: ChessInstance): Map<Key, Key[]> {
+export function toDests(chess: Chess): Map<Key, Key[]> {
   const dests = new Map();
   SQUARES.forEach(s => {
     const ms = chess.moves({square: s, verbose: true});
@@ -11,7 +11,7 @@ export function toDests(chess: ChessInstance): Map<Key, Key[]> {
   return dests;
 }
 
-export function toColor(chess: ChessInstance): Color {
+export function toColor(chess: Chess): Color {
   return (chess.turn() === 'w') ? 'white' : 'black';
 }
 
@@ -30,7 +30,7 @@ export function playOtherSide(cg: Api, chess) {
   };
 }
 
-export function aiPlay(cg: Api, chess: ChessInstance, delay: number, firstMove: boolean) {
+export function aiPlay(cg: Api, chess: Chess, delay: number, firstMove: boolean) {
   return (orig, dest) => {
     chess.move({from: orig, to: dest});
     setTimeout(() => {

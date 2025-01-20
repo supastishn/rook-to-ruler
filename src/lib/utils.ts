@@ -18,6 +18,7 @@ export function toColor(chess: ChessInstance): Color {
 export function playOtherSide(cg: Api, chess) {
   return (orig, dest) => {
     chess.move({from: orig, to: dest, promotion: 'q'});
+    // console.log(chess.ascii())
     cg.set({
       turnColor: toColor(chess),
       movable: {
@@ -25,6 +26,7 @@ export function playOtherSide(cg: Api, chess) {
         dests: toDests(chess)
       }
     });
+    console.log("Done!")
   };
 }
 

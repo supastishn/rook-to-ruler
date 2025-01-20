@@ -20,6 +20,7 @@ const cg = Chessground(document.getElementById("board"), {
       cg.set({
       movable: { events: { after: playOtherSide(cg, chess) } }
     });
+    
 })
 </script>
 

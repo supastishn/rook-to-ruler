@@ -2,6 +2,9 @@ import type { Api } from 'chessground/api';
 import type { Color, Key } from 'chessground/types';
 import type {Chess} from "chess.js";
 import {SQUARES} from 'chess.js';
+
+import {EngineInstance} from "$lib/stockfish/engine-wrapper"
+
 export function toDests(chess: Chess): Map<Key, Key[]> {
   const dests = new Map();
   SQUARES.forEach(s => {
@@ -49,3 +52,22 @@ export function aiPlay(cg: Api, chess: Chess, delay: number, firstMove: boolean)
     }, delay);
   };
 }
+
+
+export function stockfishPlay(engine: EngineInstance, cg: Api, chess: Chess,) {
+  return (orig, dest) => {
+    chess.move({from: orig, to: dest, promotion: 'q'});
+    engine.update()
+    engine.nextMove()
+      
+      cg.set({
+        turnColor: toColor(chess),
+        movable: {
+          color: toColor(chess),
+          dests: toDests(chess)
+        }
+      });
+      cg.playPremove()
+  };
+}
+

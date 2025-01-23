@@ -1,7 +1,7 @@
 <header>
 	<div class="logo">
 		<img src="/images/logo.png" alt="Rook to Ruler Logo" />
-		Rook To Ruler
+
 	</div>
 	<nav>
 		<a href="/bot">DEMO</a>

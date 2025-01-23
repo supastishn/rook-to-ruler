@@ -59,15 +59,9 @@ export function stockfishPlay(engine: EngineInstance, cg: Api, chess: Chess,) {
     chess.move({from: orig, to: dest, promotion: 'q'});
     engine.update()
     engine.nextMove()
-      
-      cg.set({
-        turnColor: toColor(chess),
-        movable: {
-          color: toColor(chess),
-          dests: toDests(chess)
-        }
-      });
-      cg.playPremove()
+    engine.evaluate()
+     
+
   };
 }
 

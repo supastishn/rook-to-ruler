@@ -1,6 +1,7 @@
 import {Chess, Move} from "chess.js"
 import type { Api } from 'chessground/api';
 import {Chessground} from "chessground"
+import {toColor, toDests} from "$lib/utils.ts"
 interface EngineOptions {
     cg?: Api,
     chess: Chess,
@@ -42,12 +43,12 @@ export class EngineInstance {
 
         this.update()
 
-        // run uci to initialize engine
+	
         
 
-        // set engine 
+        // set engine methods for when message is recieved
         this.evaler.onmessage = function(event) {
-            console.log("evaler")
+
             var line;
             
             if (event && typeof event === "object") {
@@ -91,6 +92,13 @@ export class EngineInstance {
                     inst.chess.move({from: match[1], to: match[2], promotion: match[3]});
                     if (inst.cg) {
                         inst.cg.move(match[1], match[2]);
+			inst.cg.set({
+        turnColor: toColor(inst.chess),
+        movable: {
+          color: toColor(inst.chess),
+          dests: toDests(inst.chess)
+        }
+      });                                                                           inst.cg.playPremove()
                     }
                     
                     inst.evaluation_el = "";
@@ -132,14 +140,15 @@ export class EngineInstance {
 
     update() {
         //this.fen = this.chess.fen()
+	    //
         // loop over history
         this.history = ""
         this.chess.history({verbose: true}).forEach((value: Move, index: number, array: Move[]) => {
             this.history += value.lan
             this.history += " "
         })
-        this.runCmd("position startpos", this.evaler)
-        this.runCmd("position fen" + )
+        this.runCmd("position startpos moves " + this.history, this.evaler)
+        this.runCmd("position startpos moves " + this.history)
     }
 
     nextMove(depth: number = 15) {
@@ -147,7 +156,7 @@ export class EngineInstance {
     }
 
     evaluate() {
-        this.runCmd("eval")
+        this.runCmd("eval", this.evaler)
     }
     
     

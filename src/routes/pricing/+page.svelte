@@ -1,5 +1,6 @@
 <script>
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
+	
 </script>
 
 <title>Rook to Ruler - Pricing</title>
@@ -16,8 +17,8 @@
 		</p>
 
 		<!-- Payment Button -->
-		<form action="/checkout" method="POST">
-			<button type="submit" class="btn">Pay $10 to Play Now</button>
-		</form>
+
+			<button onClick={()=>pay()} class="btn">Pay $10 to Play Now</button>
+		
 	</div>
 </div>

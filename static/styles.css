@@ -46,7 +46,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	max-height:10svh;
+	max-height: 10svh;
 }
 
 header .logo {
@@ -59,15 +59,11 @@ header .logo {
 header .logo img {
 	max-height: 100px;
 	margin-right: 20px;
-	
 }
-
-
 
 nav {
 	display: flex;
 	gap: 65px;
-	
 }
 
 nav a {

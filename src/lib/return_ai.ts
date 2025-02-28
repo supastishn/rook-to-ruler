@@ -1,7 +1,8 @@
 import OpenAI from "openai";
 
 //secure this on proeudtion
-const openai = new OpenAI({apiKey: "", dangerouslyAllowBrowser: true});
+//change api key
+const openai = new OpenAI({apiKey: 'YOUR API KEY HERE', dangerouslyAllowBrowser: true});
 
 export function getOpenAiSecure() {
 	return openai

@@ -10,27 +10,27 @@ const endpointSecret = ""
 const stripe = require('stripe')('');
 
 export const POST: RequestHandler = async ({request, cookies, url}) => {
-	const json = await request.json()
-	const signature = request.headers.get("stripe-signature")
+  const json = await request.json()
+  const signature = request.headers.get("stripe-signature")
 
-	let event
+  let event
 
-	try {
-		event = stripe.webhooks.constructEvent(json, signature, endpointSecret)
-	}
-	catch(err) {
-		error(400, "Stripe:" + err)
+  try {
+    event = stripe.webhooks.constructEvent(json, signature, endpointSecret)
+  }
+  catch(err) {
+    error(400, "Stripe:" + err)
 
-		return
-	}
-	if (
+    return
+  }
+  if (
     event.type === 'checkout.session.completed'
     || event.type === 'checkout.session.async_payment_succeeded'
   ) {
     fulfillCheckout(event.data.object.id, cookies);
 
   }
-	return json({status: 201})
+  return json({status: 201})
 
 }
 

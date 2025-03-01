@@ -11,7 +11,6 @@ const getStripe = (): Stripe => {
   return _stripe;
 };
 
-const getCustomers = () => getStripe().customers.list();
 export const GET: RequestHandler = async ({request, cookies, url}) => {
 const paymentIntent = await getStripe().paymentIntents.create
 ({

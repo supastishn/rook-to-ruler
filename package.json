@@ -31,7 +31,7 @@
 		"chessground": "^8",
 		"cm-chessboard": "^8.7.5",
 		"dotenv": "^16.4.7",
-		"openai": "^4.80.0",
+		"openai": "^4.86.1",
 		"stockfish": "^16.0.0",
 		"stripe": "^17.7.0"
 	}

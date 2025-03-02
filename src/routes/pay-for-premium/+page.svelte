@@ -4,13 +4,17 @@
 	import { onMount } from 'svelte';
 onMount(async () => {
         const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+	if (!stripe) {
+		console.error("stripe failed. check api key")
+	}
+	console.log("stripe")
         const clientJson = await fetch("/backend/stripe/secret")
-        const {clientSecret} = await clientJson.json()
+        const {client_secret: clientSecret} = await clientJson.json()
         const appearance = {
     theme: 'stripe',
   };
  // @ts-ignore
- let elements = stripe.elements({ appearance, clientSecret });
+ let elements = stripe.elements({ appearance, client_secret });
 
   const paymentElementOptions = {
     layout: "accordion",
@@ -27,6 +31,7 @@ onMount(async () => {
 
 <Navbar />
 <div class="main-content">
+UNDER CONSTRUCTION
 	<form id="payment-form">
 		<div id="payment-element">
 			<!-- Elements will create form elements here -->

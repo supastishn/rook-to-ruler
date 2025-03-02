@@ -7,8 +7,8 @@
 	import { Chess } from 'chess.js';
 	//import {Settings} from "lucide-svelte";
 	import { EngineInstance } from '$lib/stockfish/engine-wrapper.ts';
-	import { getOpenAiSecure } from "$lib/return_ai.ts"
-	import OpenAI from "openai";
+
+
 
 	const chess = new Chess();
 
@@ -74,24 +74,13 @@
 
 
 });
-							const openai = getOpenAiSecure()
+
 	async function updateAIBot(element: HTMLElement) {
 	console.log("update bot")
 	if (getCookie("time") == "true" && getCookie("paid") == "false") {
 		return
 	}
-const completion = await openai.chat.completions.create({
 	
-    model: "gpt-4o-mini",
-    messages: [
-        { role: "system", content: "You are an assistant designed to help people play the board game chess. You will recieve positions in PGN format, then you will guide the player to what move they should play, explaining the moves advantages.." },
-        {
-            role: "user",
-            content: "Hello, please give me advice for a move in this position: " + chess.pgn(),
-        },
-    ],
-    store: true
-    })
     	console.log("done")
 	console.log(completion.choices[0].message)
 	element.innerHTML = completion.choices[0].message;
